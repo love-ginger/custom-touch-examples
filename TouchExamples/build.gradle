@@ -1,8 +1,8 @@
-apply plugin: 'android'
+apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 17
-    buildToolsVersion = 18
+    compileSdkVersion 24
+    buildToolsVersion "24.0.1"
 
     sourceSets {
         main {
@@ -16,7 +16,8 @@ android {
         }
     }
 
-    dependencies {
-        compile 'com.android.support:support-v4:19.0.0'
-    }
+}
+
+dependencies {
+    compile 'com.android.support:appcompat-v7:24.1.1'
 }
