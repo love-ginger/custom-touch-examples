@@ -14,49 +14,48 @@ import android.widget.CheckBox;
  */
 public class TouchListenerActivity extends Activity implements View.OnTouchListener {
 
-    /* Views to display last seen touch event */
-    CheckBox mLockBox;
+  /* Views to display last seen touch event */ CheckBox mLockBox;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.touch_listener);
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.touch_listener);
 
-        mLockBox = (CheckBox) findViewById(R.id.checkbox_lock);
+    mLockBox = (CheckBox) findViewById(R.id.checkbox_lock);
 
-        findViewById(R.id.selection_first).setOnTouchListener(this);
-        findViewById(R.id.selection_second).setOnTouchListener(this);
-        findViewById(R.id.selection_third).setOnTouchListener(this);
-    }
+    findViewById(R.id.selection_first).setOnTouchListener(this);
+    findViewById(R.id.selection_second).setOnTouchListener(this);
+    findViewById(R.id.selection_third).setOnTouchListener(this);
+  }
 
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
+  @Override
+  public boolean onTouch(View v, MotionEvent event) {
         /*
          * Consume the events here so the buttons cannot process them
          * if the CheckBox in the UI is checked
          */
-        return mLockBox.isChecked();
+    return mLockBox.isChecked();
+  }
+
+  private String getNameForEvent(MotionEvent event) {
+    String action = "";
+    switch (event.getAction()) {
+      case MotionEvent.ACTION_DOWN:
+        action = "ACTION_DOWN";
+        break;
+      case MotionEvent.ACTION_CANCEL:
+        action = "ACTION_CANCEL";
+        break;
+      case MotionEvent.ACTION_MOVE:
+        action = "ACTION_MOVE";
+        break;
+      case MotionEvent.ACTION_UP:
+        action = "ACTION_UP";
+        break;
+      default:
+        return null;
     }
 
-    private String getNameForEvent(MotionEvent event) {
-        String action = "";
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                action = "ACTION_DOWN";
-                break;
-            case MotionEvent.ACTION_CANCEL:
-                action = "ACTION_CANCEL";
-                break;
-            case MotionEvent.ACTION_MOVE:
-                action = "ACTION_MOVE";
-                break;
-            case MotionEvent.ACTION_UP:
-                action = "ACTION_UP";
-                break;
-            default:
-                return null;
-        }
-
-        return String.format("%s\n%.1f, %.1f", action, event.getX(), event.getY());
-    }
+    return String.format("%s\n%.1f, %.1f", action, event.getX(), event.getY());
+  }
 }
